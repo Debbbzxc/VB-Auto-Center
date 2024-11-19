@@ -17,6 +17,12 @@ jobs:
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v1
 
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1
+
+    - name: Restore NuGet packages
+      run: nuget restore OOP-GUI2.sln
+
     - name: Build with MSBuild
       run: msbuild OOP-GUI2.sln /p:Configuration=Release
 
