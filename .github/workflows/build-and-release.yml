@@ -28,9 +28,13 @@ jobs:
 
     - name: Archive Artifacts
       run: |
-        mkdir release
-        copy .\VB-Auto-Center\bin\Release\*.exe .\release\
-      shell: cmd
+        mkdir -p release
+        if [ -d "./VB-Auto-Center/bin/Release" ]; then
+          cp ./VB-Auto-Center/bin/Release/*.exe ./release/
+        else
+          echo "Release directory does not exist."
+          exit 1
+      shell: bash
 
     - name: Upload Build to Release
       uses: ncipollo/release-action@v1
