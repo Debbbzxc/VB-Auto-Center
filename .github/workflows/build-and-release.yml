@@ -24,17 +24,19 @@ jobs:
       run: nuget restore OOP-GUI2.sln
 
     - name: Build with MSBuild
-      run: msbuild OOP-GUI2.sln /p:Configuration=Release
+      run: |
+        msbuild OOP-GUI2.sln /p:Configuration=Release /t:Rebuild /p:EmbedAllSources=true /p:IncludeSymbols=true
+      shell: cmd
 
     - name: Archive Artifacts
       run: |
-        mkdir -p release
-        if [ -d "./VB-Auto-Center/bin/Release" ]; then
-          cp ./VB-Auto-Center/bin/Release/*.exe ./release/
-        else
+        mkdir release
+        if exist ".\VB-Auto-Center\bin\Release" (
+          copy .\VB-Auto-Center\bin\Release\*.exe .\release\
+        ) else (
           echo "Release directory does not exist."
           exit 1
-      shell: bash
+      shell: cmd
 
     - name: Upload Build to Release
       uses: ncipollo/release-action@v1
