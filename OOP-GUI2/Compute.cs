@@ -11,12 +11,12 @@ namespace OOP_GUI2
 {
     public class Compute
     {
-        public double carSalesPrice {  get; set; }
-        public double accessoriesAndFinish {  get; set; }
-        public double subtotal {  get; set; }
+        public double carSalesPrice { get; set; }
+        public double accessoriesAndFinish { get; set; }
+        public double subtotal { get; set; }
         public double salesTax { get; set; }
-        public double total {  get; set; }
-        public double tradeinAllowance {  get; set; }
+        public double total { get; set; }
+        public double tradeinAllowance { get; set; }
         public double amountDue { get; set; }
         public Compute()
         {

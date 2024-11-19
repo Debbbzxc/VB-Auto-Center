@@ -45,33 +45,66 @@ namespace OOP_GUI2
             Constant constant = new Constant();
             Compute compute = new Compute();
 
-            if (txtCarSalesPrice.Text == string.Empty) { txtCarSalesPrice.Text = compute.carSalesPrice.ToString("F2"); }
-            else
+            while (true)
             {
                 if (double.TryParse(txtCarSalesPrice.Text, out double carSalesPrice))
                 {
-                    compute.carSalesPrice = carSalesPrice;
+                    if (carSalesPrice > 0)
+                    {
+                        compute.carSalesPrice = carSalesPrice;
+                        break;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please enter a number greater than 0 in car sales price.");
+                        txtCarSalesPrice.Text = string.Empty;
+                        txtCarSalesPrice.Focus();
+                        return;
+                    }
+                }
+                else if (txtCarSalesPrice.Text == string.Empty)
+                {
+                    MessageBox.Show("Please enter the car sales price.");
+                    txtCarSalesPrice.Focus();
+                    return;
                 }
                 else
                 {
-                    compute.showMessageBox("car sales price");
+                    MessageBox.Show("Please enter a valid number in car sales price.");
                     txtCarSalesPrice.Text = string.Empty;
                     txtCarSalesPrice.Focus();
+                    return;
                 }
             }
 
-            if (txtTradeinAllowance.Text == string.Empty) { txtTradeinAllowance.Text = compute.tradeinAllowance.ToString("F2"); }
-            else
+            while (true)
             {
                 if (double.TryParse(txtTradeinAllowance.Text, out double tradeinAllowance))
                 {
-                    compute.tradeinAllowance = tradeinAllowance;
+                    if (tradeinAllowance >= 0)
+                    {
+                        compute.tradeinAllowance = tradeinAllowance;
+                        break;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please enter a number greater than 0 in car sales price.");
+                        txtTradeinAllowance.Text = string.Empty;
+                        txtTradeinAllowance.Focus();
+                        return;
+                    }
+                }
+                else if (txtTradeinAllowance.Text == string.Empty)
+                {
+                    txtTradeinAllowance.Text = compute.tradeinAllowance.ToString();
+                    break;
                 }
                 else
                 {
-                    compute.showMessageBox("trade-in allowance");
+                    MessageBox.Show("Please enter a valid number in car sales price.");
                     txtTradeinAllowance.Text = string.Empty;
                     txtTradeinAllowance.Focus();
+                    return; 
                 }
             }
 
@@ -82,16 +115,11 @@ namespace OOP_GUI2
             if (rbPearlized.Checked) { compute.accessoriesAndFinish += constant.pearlized; }
             if (rbCustomizedDet.Checked) { compute.accessoriesAndFinish += constant.customizedDet; }
 
-            txtAccessoriesAndFinish.Text = compute.accessoriesAndFinish.ToString("F2");
-            txtSubtotal.Text = compute.showSubtotal(compute).ToString("F2");
-            txtSalesTax.Text = compute.showSalesTax(compute, constant).ToString("F2");
-            txtTotal.Text = compute.showTotal(compute).ToString("F2");
-            txtAmountDue.Text = compute.showAmountDue(compute).ToString("F2");
-        }
-
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Process.Start("https://github.com/Debbbzxc");
+            txtAccessoriesAndFinish.Text = compute.accessoriesAndFinish.ToString("N2");
+            txtSubtotal.Text = compute.showSubtotal(compute).ToString("N2");
+            txtSalesTax.Text = compute.showSalesTax(compute, constant).ToString("N2");
+            txtTotal.Text = compute.showTotal(compute).ToString("N2");
+            txtAmountDue.Text = compute.showAmountDue(compute).ToString("N2");
         }
     }
 }
