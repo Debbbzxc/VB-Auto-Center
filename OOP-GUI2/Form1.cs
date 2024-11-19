@@ -88,7 +88,7 @@ namespace OOP_GUI2
                     }
                     else
                     {
-                        MessageBox.Show("Please enter a number greater than 0 in car sales price.");
+                        MessageBox.Show("Please enter a number greater than 0 in trade-in allowance.");
                         txtTradeinAllowance.Text = string.Empty;
                         txtTradeinAllowance.Focus();
                         return;
@@ -101,25 +101,25 @@ namespace OOP_GUI2
                 }
                 else
                 {
-                    MessageBox.Show("Please enter a valid number in car sales price.");
+                    MessageBox.Show("Please enter a valid number in trade-in allowance.");
                     txtTradeinAllowance.Text = string.Empty;
                     txtTradeinAllowance.Focus();
                     return; 
                 }
             }
 
-            if (cbStereoSystem.Checked) { compute.accessoriesAndFinish += constant.stereoSystem; }
-            if (cbLeatherInterior.Checked) { compute.accessoriesAndFinish += constant.leatherInterior; }
-            if (cbComputerNav.Checked) { compute.accessoriesAndFinish += constant.computerNav; }
-            if (rbStandard.Checked) { compute.accessoriesAndFinish += constant.standard; }
-            if (rbPearlized.Checked) { compute.accessoriesAndFinish += constant.pearlized; }
-            if (rbCustomizedDet.Checked) { compute.accessoriesAndFinish += constant.customizedDet; }
+            if (cbStereoSystem.Checked) { compute.setAccessoriesAndFinishPrice("stereo"); }
+            if (cbLeatherInterior.Checked) { compute.setAccessoriesAndFinishPrice("leather"); }
+            if (cbComputerNav.Checked) { compute.setAccessoriesAndFinishPrice("computer"); }
+            if (rbStandard.Checked) { compute.setAccessoriesAndFinishPrice("standard"); }
+            if (rbPearlized.Checked) { compute.setAccessoriesAndFinishPrice("pearlized"); }
+            if (rbCustomizedDet.Checked) { compute.setAccessoriesAndFinishPrice("customized"); }
 
-            txtAccessoriesAndFinish.Text = compute.accessoriesAndFinish.ToString("N2");
-            txtSubtotal.Text = compute.showSubtotal(compute).ToString("N2");
-            txtSalesTax.Text = compute.showSalesTax(compute, constant).ToString("N2");
-            txtTotal.Text = compute.showTotal(compute).ToString("N2");
-            txtAmountDue.Text = compute.showAmountDue(compute).ToString("N2");
+            txtAccessoriesAndFinish.Text = compute.showResult("accessories").ToString("N2");
+            txtSubtotal.Text = compute.showResult("subtotal").ToString("N2");
+            txtSalesTax.Text = compute.showResult("salesTax").ToString("N2");
+            txtTotal.Text = compute.showResult("total").ToString("N2");
+            txtAmountDue.Text = compute.showResult("amountDue").ToString("N2");
         }
     }
 }

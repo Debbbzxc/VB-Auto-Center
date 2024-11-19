@@ -9,7 +9,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
 
 namespace OOP_GUI2
 {
-    public class Compute
+    public class Compute : Constant
     {
         public double carSalesPrice { get; set; }
         public double accessoriesAndFinish { get; set; }
@@ -38,25 +38,41 @@ namespace OOP_GUI2
             this.tradeinAllowance = tradeinAllowance;
             this.amountDue = amountDue;
         }
-        public double showSubtotal(Compute compute)
+        public double getAccessoriesAndFinishPrice(string addon)
         {
-            return compute.subtotal = compute.carSalesPrice + compute.accessoriesAndFinish;
+            if (addon == "stereo")
+                return stereoSystem;
+            else if (addon == "leather")
+                return leatherInterior;
+            else if (addon == "computer")
+                return computerNav;
+            else if (addon == "standard")
+                return standard;
+            else if (addon == "pearlized")
+                return pearlized;
+            else if (addon == "customized")
+                return customizedDet;
+            else
+                return 0.00;
         }
-        public double showSalesTax(Compute compute, Constant constant)
+        public double setAccessoriesAndFinishPrice(string addon)
         {
-            return compute.salesTax = compute.subtotal * constant.taxRate;
+            return accessoriesAndFinish += getAccessoriesAndFinishPrice(addon);
         }
-        public double showTotal(Compute compute)
+        public double showResult(string result)
         {
-            return compute.total = compute.subtotal + compute.salesTax;
-        }
-        public double showAmountDue(Compute compute)
-        {
-            return compute.amountDue = compute.total - compute.tradeinAllowance;
-        }
-        public void showMessageBox(string message)
-        {
-            MessageBox.Show($"Please enter a valid numeric value in {message}.");
+            if (result == "accessories")
+                return accessoriesAndFinish;
+            else if (result == "subtotal")
+                return subtotal = carSalesPrice + accessoriesAndFinish;
+            else if (result == "salesTax")
+                return salesTax = subtotal * taxRate;
+            else if (result == "total")
+                return total = subtotal + salesTax;
+            else if (result == "amountDue")
+                return amountDue = total - tradeinAllowance;
+            else
+                return 0.00;
         }
     }
 }
