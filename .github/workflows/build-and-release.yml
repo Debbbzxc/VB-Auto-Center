@@ -31,8 +31,8 @@ jobs:
     - name: Archive Artifacts
       run: |
         mkdir release
-        if exist ".\VB-Auto-Center\bin\Release" (
-          copy .\VB-Auto-Center\bin\Release\*.exe .\release\
+        if exist ".\OOP-GUI2\bin\Release" (
+          copy .\OOP-GUI2\bin\Release\*.exe .\release\
         ) else (
           echo "Release directory does not exist."
           exit 1
